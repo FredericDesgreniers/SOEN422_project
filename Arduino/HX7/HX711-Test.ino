@@ -33,12 +33,13 @@ The HX711 board can be powered from 2.7V to 5V so the Arduino 5V power should be
 
 #include "HX711.h"
 
-#define DOUT  3
-#define CLK  2
+//#define DOUT  9
+//#define CLK  2
 
-HX711 scale(DOUT, CLK);
+HX711 scale(11, 10);
 
-float calibration_factor = -7050; //-7050 worked for my 440lb max scale setup
+float calibration_factor = 100; //-7050 worked for my 440lb max scale setup
+                                // -4000 zero'd our 10k
 
 void setup() {
    Serial.begin(9600);
@@ -75,4 +76,6 @@ void loop() {
       else if (temp == '-' || temp == 'z')
          calibration_factor -= 10;
    }
+
+   delay(100);
 }
