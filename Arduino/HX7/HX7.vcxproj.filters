@@ -15,9 +15,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <None Include="HX7.ino" />
-  </ItemGroup>
-  <ItemGroup>
     <ClInclude Include="__vm\.HX7.vsarduino.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -29,5 +26,8 @@
     <ClCompile Include="HX711.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="HX711-Test.ino" />
   </ItemGroup>
 </Project>
