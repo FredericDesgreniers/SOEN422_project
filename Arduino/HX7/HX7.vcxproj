@@ -82,7 +82,11 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="HX711.h" />
     <ClInclude Include="__vm\.HX7.vsarduino.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="HX711.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
