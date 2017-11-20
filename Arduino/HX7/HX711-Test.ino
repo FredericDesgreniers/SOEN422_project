@@ -56,37 +56,16 @@ void setup() {
 void loop() {
    Serial.print("Reading: ");
    unsigned long value = 0;
-   uint8_t data[3] = { 0 };
-   uint8_t filler = 0x00;
 
-   // pulse the clock pin 24 times to read the data
-   data[2] = shiftIn(10, 11, MSBFIRST);
-   data[1] = shiftIn(10, 11, MSBFIRST);
-   data[0] = shiftIn(10, 11, MSBFIRST);
-
-   // set the channel and the gain factor for the next reading using the clock pin
-   for (unsigned int i = 0; i < 1; i++) {
-      digitalWrite(11, HIGH);
-      digitalWrite(11, LOW);
-   }
-
-   // Replicate the most significant bit to pad out a 32-bit signed integer
-   if (data[2] & 0x80) {
-      filler = 0xFF;
-   }
-   else {
-      filler = 0x00;
-   }
-
-   // Construct a 32-bit signed integer
-   value = (static_cast<unsigned long>(filler) << 24
-      | static_cast<unsigned long>(data[2]) << 16
-      | static_cast<unsigned long>(data[1]) << 8
-      | static_cast<unsigned long>(data[0]));
+   digitalRead(10);
 
    Serial.print(value); //scale.get_units() returns a float
    Serial.print(" g"); //You can change this to kg but you'll need to refactor the calibration_factor
    Serial.println();
+
+
+   digitalWrite(11, HIGH);
+   digitalWrite(11, LOW);
 }
 
 //void setup() {
