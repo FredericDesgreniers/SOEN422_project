@@ -20,7 +20,8 @@ Your calibration factor may be very positive or very negative. It all depends on
 and the direction the sensors deflect from zero state
 This example code uses bogde's excellent library: https://github.com/bogde/HX711
 bogde's library is released under a GNU GENERAL PUBLIC LICENSE
-Arduino pin 2 -> HX711 CLK
+Arduino pin:
+2 -> HX711 CLK
 3 -> DOUT
 5V -> VCC
 GND -> GND
@@ -33,62 +34,60 @@ The HX711 board can be powered from 2.7V to 5V so the Arduino 5V power should be
 
 #include "HX711.h"
 
-//#define DOUT  9
-//#define CLK  2
-
 HX711 scale(PD6, PD7);
 
 float calibration_factor = -103560; // resonable with our 10kg
-//void setup() {
-//   Serial.begin(9600);
-//   Serial.println("HX711 scale demo");
-//
-//   //scale.set_scale(-103560); //This value is obtained by using the SparkFun_HX711_Calibration sketch
-//   //scale.tare(); //Assuming there is no weight on the scale at start up, reset the scale to 0
-//}
-//
-//void loop() {
-//   Serial.print("Reading: ");
-//   Serial.print(scale.get_units(), 4); //scale.get_units() returns a float
-//   Serial.print(" lbs"); //You can change this to kg but you'll need to refactor the calibration_factor
-//   Serial.println();
-//}
 
 void setup() {
    Serial.begin(9600);
-   Serial.println("HX711 calibration sketch");
-   Serial.println("Remove all weight from scale");
-   Serial.println("After readings begin, place known weight on scale");
-   Serial.println("Press + or a to increase calibration factor");
-   Serial.println("Press - or z to decrease calibration factor");
+   Serial.println("HX711 scale demo");
 
-   scale.set_scale();
-   scale.tare(); //Reset the scale to 0
-
-   long zero_factor = scale.read_average(); //Get a baseline reading
-   Serial.print("Zero factor: "); //This can be used to remove the need to tare the scale. Useful in permanent scale projects.
-   Serial.println(zero_factor);
+   scale.set_scale(-103560); //This value is obtained by using the SparkFun_HX711_Calibration sketch
+   scale.tare(); //Assuming there is no weight on the scale at start up, reset the scale to 0
 }
 
 void loop() {
-
-   scale.set_scale(calibration_factor); //Adjust to this calibration factor
-
    Serial.print("Reading: ");
-   Serial.print(scale.get_units(), 4);
-   Serial.print(" lbs"); //Change this to kg and re-adjust the calibration factor if you follow SI units like a sane person
-   Serial.print(" calibration_factor: ");
-   Serial.print(calibration_factor);
+   Serial.print(scale.get_units(), 4); //scale.get_units() returns a float
+   Serial.print(" lbs"); //You can change this to kg but you'll need to refactor the calibration_factor
    Serial.println();
-
-   if (Serial.available())
-   {
-      char temp = Serial.read();
-      if (temp == '+' || temp == 'a')
-         calibration_factor += 10;
-      else if (temp == '-' || temp == 'z')
-         calibration_factor -= 10;
-   }
-
-   delay(100);
 }
+
+//void setup() {
+//   Serial.begin(9600);
+//   Serial.println("HX711 calibration sketch");
+//   Serial.println("Remove all weight from scale");
+//   Serial.println("After readings begin, place known weight on scale");
+//   Serial.println("Press + or a to increase calibration factor");
+//   Serial.println("Press - or z to decrease calibration factor");
+//
+//   scale.set_scale();
+//   scale.tare(); //Reset the scale to 0
+//
+//   long zero_factor = scale.read_average(); //Get a baseline reading
+//   Serial.print("Zero factor: "); //This can be used to remove the need to tare the scale. Useful in permanent scale projects.
+//   Serial.println(zero_factor);
+//}
+//
+//void loop() {
+//
+//   scale.set_scale(calibration_factor); //Adjust to this calibration factor
+//
+//   Serial.print("Reading: ");
+//   Serial.print(scale.get_units(), 4);
+//   Serial.print(" lbs"); //Change this to kg and re-adjust the calibration factor if you follow SI units like a sane person
+//   Serial.print(" calibration_factor: ");
+//   Serial.print(calibration_factor);
+//   Serial.println();
+//
+//   if (Serial.available())
+//   {
+//      char temp = Serial.read();
+//      if (temp == '+' || temp == 'a')
+//         calibration_factor += 10;
+//      else if (temp == '-' || temp == 'z')
+//         calibration_factor -= 10;
+//   }
+//
+//   delay(100);
+//}
