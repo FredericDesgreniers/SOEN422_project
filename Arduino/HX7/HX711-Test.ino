@@ -36,7 +36,7 @@ The HX711 board can be powered from 2.7V to 5V so the Arduino 5V power should be
 //#define DOUT  9
 //#define CLK  2
 
-HX711 scale(10, 11);
+HX711 scale(PD6, PD7);
 
 float calibration_factor = -4100; //-7050 worked for my 440lb max scale setup
                                 // -4000 zero'd our 10kg
