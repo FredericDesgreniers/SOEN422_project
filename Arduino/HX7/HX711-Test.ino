@@ -36,24 +36,56 @@ The HX711 board can be powered from 2.7V to 5V so the Arduino 5V power should be
 //#define DOUT  9
 //#define CLK  2
 
-HX711 scale(10, 11);
 
-float calibration_factor = 100; //-7050 worked for my 440lb max scale setup
-                                // -4000 zero'd our 10kg
 void setup() {
    Serial.begin(9600);
    Serial.println("HX711 scale demo");
 
+
+   int PD_SCK = 11;
+   int DOUT = 10;
+
+   pinMode(PD_SCK, OUTPUT);
+   pinMode(DOUT, INPUT);
    //scale.set_scale(-4000); //This value is obtained by using the SparkFun_HX711_Calibration sketch
-   scale.tare(); //Assuming there is no weight on the scale at start up, reset the scale to 0
+   //scale.tare(); //Assuming there is no weight on the scale at start up, reset the scale to 0
 
    Serial.println("Readings:");
 }
 
 void loop() {
    Serial.print("Reading: ");
-   Serial.print(scale.get_units(), 1); //scale.get_units() returns a float
-   Serial.print(" lbs"); //You can change this to kg but you'll need to refactor the calibration_factor
+   unsigned long value = 0;
+   uint8_t data[3] = { 0 };
+   uint8_t filler = 0x00;
+
+   // pulse the clock pin 24 times to read the data
+   data[2] = shiftIn(10, 11, MSBFIRST);
+   data[1] = shiftIn(10, 11, MSBFIRST);
+   data[0] = shiftIn(10, 11, MSBFIRST);
+
+   // set the channel and the gain factor for the next reading using the clock pin
+   for (unsigned int i = 0; i < 1; i++) {
+      digitalWrite(11, HIGH);
+      digitalWrite(11, LOW);
+   }
+
+   // Replicate the most significant bit to pad out a 32-bit signed integer
+   if (data[2] & 0x80) {
+      filler = 0xFF;
+   }
+   else {
+      filler = 0x00;
+   }
+
+   // Construct a 32-bit signed integer
+   value = (static_cast<unsigned long>(filler) << 24
+      | static_cast<unsigned long>(data[2]) << 16
+      | static_cast<unsigned long>(data[1]) << 8
+      | static_cast<unsigned long>(data[0]));
+
+   Serial.print(value); //scale.get_units() returns a float
+   Serial.print(" g"); //You can change this to kg but you'll need to refactor the calibration_factor
    Serial.println();
 }
 
@@ -78,7 +110,7 @@ void loop() {
 //   scale.set_scale(calibration_factor); //Adjust to this calibration factor
 //
 //   Serial.print("Reading: ");
-//   Serial.print(scale.get_units(), 1);
+//   Serial.print(scale.get_units(), 5);
 //   Serial.print(" lbs"); //Change this to kg and re-adjust the calibration factor if you follow SI units like a sane person
 //   Serial.print(" calibration_factor: ");
 //   Serial.print(calibration_factor);
