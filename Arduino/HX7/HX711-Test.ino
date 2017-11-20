@@ -38,21 +38,18 @@ The HX711 board can be powered from 2.7V to 5V so the Arduino 5V power should be
 
 HX711 scale(PD6, PD7);
 
-float calibration_factor = -4100; //-7050 worked for my 440lb max scale setup
-                                // -4000 zero'd our 10kg
+float calibration_factor = -103560; // resonable with our 10kg
 //void setup() {
 //   Serial.begin(9600);
 //   Serial.println("HX711 scale demo");
 //
-//   //scale.set_scale(-4000); //This value is obtained by using the SparkFun_HX711_Calibration sketch
+//   //scale.set_scale(-103560); //This value is obtained by using the SparkFun_HX711_Calibration sketch
 //   //scale.tare(); //Assuming there is no weight on the scale at start up, reset the scale to 0
-//
-//   Serial.println("Readings:");
 //}
 //
 //void loop() {
 //   Serial.print("Reading: ");
-//   Serial.print(scale.get_units(), 1); //scale.get_units() returns a float
+//   Serial.print(scale.get_units(), 4); //scale.get_units() returns a float
 //   Serial.print(" lbs"); //You can change this to kg but you'll need to refactor the calibration_factor
 //   Serial.println();
 //}
