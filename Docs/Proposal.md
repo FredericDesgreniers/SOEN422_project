@@ -7,7 +7,7 @@
 4. [Extra Hardware Requirements](#Extra-Hardware-Requirements)
 
 ## Contributors - Team Cerberus
-**Name** | ** ID**
+**Name** | **ID**
 :--:|---
 Christopher McArthur | `40004257`
 Frederic Desgreniers | `40016777`
