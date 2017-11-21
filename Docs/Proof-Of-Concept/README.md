@@ -1,6 +1,8 @@
 # Proof of Concept - Team Cerberus
 In this stage of the project we set out to build a small test setup using the hardware obtained. This would allow us to build the Web UI and communication components congruently with the engineering of the full scale device and proide the necessary knowledge to build a full system.
 
+> To best view this document, use the [link](https://github.com/FredericDesgreniers/SOEN422_project/blob/master/Docs/Proof-Of-Concept/README.md) provided.
+
 ### Table of Contents
 1. [Contributors](#Contributors)
 2. [Test Unit](#test-unit)
