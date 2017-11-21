@@ -20,7 +20,8 @@ Your calibration factor may be very positive or very negative. It all depends on
 and the direction the sensors deflect from zero state
 This example code uses bogde's excellent library: https://github.com/bogde/HX711
 bogde's library is released under a GNU GENERAL PUBLIC LICENSE
-Arduino pin 2 -> HX711 CLK
+Arduino pin:
+2 -> HX711 CLK
 3 -> DOUT
 5V -> VCC
 GND -> GND
@@ -33,26 +34,21 @@ The HX711 board can be powered from 2.7V to 5V so the Arduino 5V power should be
 
 #include "HX711.h"
 
-//#define DOUT  9
-//#define CLK  2
+HX711 scale(PD6, PD7);
 
-HX711 scale(10, 11);
+float calibration_factor = -103560; // resonable with our 10kg
 
-float calibration_factor = 100; //-7050 worked for my 440lb max scale setup
-                                // -4000 zero'd our 10kg
 void setup() {
    Serial.begin(9600);
    Serial.println("HX711 scale demo");
 
-   //scale.set_scale(-4000); //This value is obtained by using the SparkFun_HX711_Calibration sketch
+   scale.set_scale(-103560); //This value is obtained by using the SparkFun_HX711_Calibration sketch
    scale.tare(); //Assuming there is no weight on the scale at start up, reset the scale to 0
-
-   Serial.println("Readings:");
 }
 
 void loop() {
    Serial.print("Reading: ");
-   Serial.print(scale.get_units(), 1); //scale.get_units() returns a float
+   Serial.print(scale.get_units(), 4); //scale.get_units() returns a float
    Serial.print(" lbs"); //You can change this to kg but you'll need to refactor the calibration_factor
    Serial.println();
 }
@@ -78,7 +74,7 @@ void loop() {
 //   scale.set_scale(calibration_factor); //Adjust to this calibration factor
 //
 //   Serial.print("Reading: ");
-//   Serial.print(scale.get_units(), 1);
+//   Serial.print(scale.get_units(), 4);
 //   Serial.print(" lbs"); //Change this to kg and re-adjust the calibration factor if you follow SI units like a sane person
 //   Serial.print(" calibration_factor: ");
 //   Serial.print(calibration_factor);
