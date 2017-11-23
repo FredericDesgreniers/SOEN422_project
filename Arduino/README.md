@@ -6,3 +6,4 @@
 * https://circuits4you.com/2016/11/25/hx711-arduino-load-cell/
 * similar https://learn.sparkfun.com/tutorials/iot-industrial-scale
 * explination https://www.phidgets.com/docs/Load_Cell_Primer#Single-Point_Load_Cells
+* [combinator board hook up](https://learn.sparkfun.com/tutorials/load-cell-amplifier-hx711-breakout-hookup-guide#hardware-hookup-)
