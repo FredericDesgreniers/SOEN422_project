@@ -19,11 +19,11 @@ Frederic Desgreniers | `40016777`
 
 Components | dimensions
 :---:|---
-Top plate | 
-front bolt |
-load cell | 
-back bolt |
-bottom plate |
+Top plate | 3x3x1/4
+front bolt | 1/32x1/2 
+load cell | 2+1/16x1/2x1/2
+back bolt | 1/32x1
+bottom plate | 5x5x1/4
 
 ## Results
 
