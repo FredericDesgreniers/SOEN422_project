@@ -17,7 +17,7 @@ public class Config extends AbstractWebSocketMessageBrokerConfigurer{
 
     @Override
     public void registerStompEndpoints(StompEndpointRegistry registry) {
-        registry.addEndpoint("/dataStream");
-        registry.addEndpoint("/dataStream").withSockJS();
+        registry.addEndpoint("/guide");
+        registry.addEndpoint("/guide").withSockJS();
     }
 }

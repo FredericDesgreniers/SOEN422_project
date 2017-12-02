@@ -1,20 +1,20 @@
 package me.frde.ForceWebsite;
 
 public class DataMessage {
-    private String time;
+    private int time;
     private float force;
     
-    public DataMessage(String time, float force){
+    public DataMessage(int time, float force){
         this.time = time;
         this.force = force;
     }
     
 
-    public String getTime() {
+    public int getTime() {
         return time;
     }
 
-    public void setTime(String time) {
+    public void setTime(int time) {
         this.time = time;
     }
 
