@@ -18,7 +18,7 @@ public class DataService {
     @Autowired
     private SimpMessagingTemplate template;
 
-    @Scheduled(fixedDelay = 1000)
+
     public void boardcastMessage()throws Exception{
         Random r = new Random(System.currentTimeMillis());
         template.convertAndSend("/data/sub", new DataMessage(index.getAndIncrement(), r.nextFloat()));
