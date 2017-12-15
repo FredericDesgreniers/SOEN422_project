@@ -5,9 +5,27 @@ This phase of the project we are aiming to deliver a force test system which is 
 
 ### Table of Contents
 1. [Contributors](#Contributors)
-2. [Design](#Design)
-3. [Results](#results)
-4. [Figures](#Figures)
+3. [Introduction](#introduction)
+4. [Description](#Description)
+   1. [Name](#name)
+   2. [function](#function)
+   3. [performance](#performance)
+   4. [scope of complition](#scope-of-completion)
+3. [hardware design](#hardware)
+   1. [system]()
+   2. [subsystems]()
+   3. [intercommunication]()
+4. [software design](#)
+   1. [system design]()
+   2. [subsystems]()
+   3. [arduino functions]()
+   4. [system communication]()
+1. [development software/enviroments]
+1. [system delivery]
+   1. [initialisation]
+   1. [operation]
+1. [discussion]
+1. [Apendix]
 
 ## Contributors
 **Name** | **ID**
