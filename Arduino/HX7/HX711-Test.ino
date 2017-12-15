@@ -41,9 +41,9 @@ float calibration_factor = -6500; // resonable with our 200kg
 
 void setup() {
    Serial.begin(9600);
-   Serial.println("HX711 scale demo");
+   //Serial.println("HX711 scale demo");
 
-   scale.set_scale(-103560); //This value is obtained by using the SparkFun_HX711_Calibration sketch
+   scale.set_scale(-6500); //This value is obtained by using the SparkFun_HX711_Calibration sketch
    scale.tare(); //Assuming there is no weight on the scale at start up, reset the scale to 0
 }
 
