@@ -1,31 +1,31 @@
-# Full Scale
-This phase of the project we are aiming to deliver a force test system which is capable to taking punch.
+# Force Gauge - Team A
+In this project we aimed to develop a force gauge which was capable of detecting the force applied from a human punch. This document outlines the goals of the project, the design of the system, and the final resulting prototype which was delivered.
 
 > To best view this document, use the [link](https://github.com/FredericDesgreniers/SOEN422_project/blob/master/Docs/Full-Scale/README.md) provided.
 
 ### Table of Contents
 1. [Contributors](#Contributors)
-3. [Introduction](#introduction)
-4. [Description](#Description)
+1. [Introduction](#introduction)
+1. [Description](#Description)
    1. [Name](#name)
-   2. [function](#function)
-   3. [performance](#performance)
-   4. [scope of complition](#scope-of-completion)
-3. [hardware design](#hardware)
+   1. [function](#function)
+   1. [performance](#performance)
+   1. [scope of complition](#scope-of-completion)
+1. [hardware design](#hardware)
    1. [system]()
-   2. [subsystems]()
-   3. [intercommunication]()
-4. [software design](#)
+   1. [subsystems]()
+   1. [intercommunication]()
+1. [software design](#)
    1. [system design]()
-   2. [subsystems]()
-   3. [arduino functions]()
-   4. [system communication]()
-1. [development software/enviroments]
-1. [system delivery]
-   1. [initialisation]
-   1. [operation]
-1. [discussion]
-1. [Apendix]
+   1. [subsystems]()
+   1. [arduino functions]()
+   1. [system communication]()
+1. [development software/enviroments]()
+1. [system delivery]()
+   1. [initialisation]()
+   1. [operation]()
+1. [discussion]()
+1. [Apendix]()
 
 ## Contributors
 **Name** | **ID**
