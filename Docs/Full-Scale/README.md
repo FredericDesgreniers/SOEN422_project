@@ -47,21 +47,6 @@ The concept model was two circular plates with the four loadcells in between pos
 
 For these reasons we opted for two rectangular plates; the top plate is `3x4x1/4` and the bottom plate is `5x4x1/4`. The top plate is centered over the bottom plate with an inch margin on the left and right sides of the force gauge. The top plate is smaller to provide a concentrate area to deliver the force as well as the requirements of the loadcells.
 
-## Design
-**Components** | **Dimensions (in)**
-:---:|---
-Top plate | 3x3x1/4
-front bolt | 1/32x1/2 
-load cell | 2+1/16x1/2x1/2
-back bolt | 1/32x1
-bottom plate | 5x5x1/4
-
-### Top Bolt 
-- Pacement
-  * center of bolt 3/4 frrom corner towards center
-- Installation *{ TO BE FINALIZED }*
-  1. through top plate, inset and grinded down... how to do this evenly... requires extra nut on inside
-  2. weld to under side of top plate... how accurately can this be done?
 
 ## Software Design
 ### System Design
@@ -76,7 +61,6 @@ On the bealebone, a python program was used in order to bridge communication bet
 The python program was meant to send the values using an http POST request to a java webserver, also hosted on the beaglebone. However, the server ended up being hosted an external computer due to a faillure to get some of the dependencies to work on the beaglebone's version of Debian. 
 
 ### Subsystems
-
 #### Arduino
 TODO: Arduino subsystem
 
@@ -145,7 +129,3 @@ Every time a value is sent to /data using POST, this method gets triggered:
 
 Since only the value is sent in the POST request body, we can convert it directly to a float using `float.valueOf(body)`. 
 `template.convertAndSend(...)` will send a websocket message made of an index integer and a float to all the subscribers of the /data/sub websocket. 
-
-## Results
-
-## Figures
