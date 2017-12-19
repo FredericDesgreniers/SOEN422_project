@@ -64,6 +64,89 @@ bottom plate | 5x5x1/4
   1. through top plate, inset and grinded down... how to do this evenly... requires extra nut on inside
   2. weld to under side of top plate... how accurately can this be done?
 
+## Software Design
+### System Design
+The software was responsible for transfering the values outputed by the scale from the arduino to the beaglebone and finalyl to the webserver. 
+
+**Arduino**
+TODO: Described arduino software
+
+**BeagleBone**
+On the bealebone, a python program was used in order to bridge communication between the arduino and the web server used to render a chart of the force applied.
+
+The python program was the  meant to send the values using an http POST request to a java webserver, also hosted on the beaglebone. However, the server ended up being hosted an external computer due to a faillure to get some of the dependencies to work on the beaglebone's version of Debian. 
+
+### Subsystems
+
+#### Arduino
+TODO: Arduino subsystem
+
+#### Beaglebone - Python
+A python script was used to bridge the communication between the arduino and the java web server. The script used a library called PySerial. 
+```
+import serial
+import requests
+
+ser = serial.Serial('/dev/ttyO2', 9600)
+
+while True:
+   dataValue = ser.readline()
+   requests.post('http://192.168.7.1/data', data = dataValue)
+   
+ser.close() 
+```
+
+`serial.Serial('/dev/ttyO2',9600)` opens the uart2 port (ttyO2) for communication with a baudrate of 9600. 
+The code then reads a set of characters (seperated by a new line) and sends it using a post request to the java server continuously. 
+
+TODO: Go into more detial on how serial.Serial and ser.readline() work.
+
+#### Java
+A java webserver using the Spring Boot framework is responsible for displaying the values sent by the python server on a web page. 
+The webpage uses a chart library (CanvasJS) and websockets in order to constantly update the values. 
+
+The spring boot application enables websocets using `@EnableWebSocketMessageBroker` on the main config class. 
+
+It then registers a web socket entry point using
+```
+@Override
+    public void configureMessageBroker(MessageBrokerRegistry config) {
+        config.enableSimpleBroker("/data");
+        ...
+}
+```
+That makes it so a client can connect to a websocket using /data/sub.
+
+This can be seen in the javascript code:
+```
+stompClient.subscribe('/data/sub', function (message){
+            var dataToShow = JSON.parse(message.body);
+            dps.push({
+                x: dataToShow.time,
+                y: dataToShow.force
+            });
+            if (dps.length > dataLength) {
+                dps.shift();
+            }
+            chart.render();
+});
+```
+It subscribes to /data/sub and then pushes a new value to the chart every time a message gets received. 
+Every time a value is sent to /data using POST, this method gets triggered: 
+
+```
+ @RequestMapping("/data")
+    public ResponseEntity<String> data(@RequestBody String body) {
+
+        template.convertAndSend("/data/sub", new DataMessage(index.getAndIncrement(), Float.valueOf(body)));
+
+        return ResponseEntity.status(200).build();
+}
+```
+
+Since only the value is sent in the POST request body, we can convert it directly to a float using `float.valueOf(body)`. 
+`template.convertAndSend(...)` will send a websocket message made of an index integer and a float to all the subscribers of the /data/sub websocket. 
+
 ## Results
 
 ## Figures
