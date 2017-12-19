@@ -11,15 +11,15 @@ In this project we aimed to develop a force gauge which was capable of detecting
    1. [function](#function)
    1. [performance](#performance)
    1. [scope of complition](#scope-of-completion)
-1. [hardware design](#hardware)
-   1. [system]()
-   1. [subsystems]()
-   1. [intercommunication]()
-1. [software design](#)
-   1. [system design]()
-   1. [subsystems]()
-   1. [arduino functions]()
-   1. [system communication]()
+1. [Hardware Design](#Hardware-Design)
+   1. [System](#System)
+   1. [Subsystems](#Subsystems)
+   1. [intercommunication](#Intercommunication)
+1. [Software Design](#Software-Design)
+   1. [System Design](#System-Design)
+   1. [Subsystems](#Subsystems)
+      1. [Arduino Functions](#Arduino)
+      1. [System Communication](#beaglebone---python)
 1. [development software/enviroments]()
 1. [system delivery]()
    1. [initialisation]()
@@ -39,14 +39,24 @@ This force gague system, called the **Punch O-Meter**, is designed to be placed 
 The project succeded is producing a functional prototype which was able to capture the force applied and displayed the results through a web interface. However the lantency of the system was never refined to be low enough to capture a punch reliably.
 
 ## Hardware Design
+### System
+_TODO:_ describe overall system
+
+### Subsystems
+#### Force Gauge
 The main hardware component is the force gauge itself, this went through many phases thought stuck with the initial concept of usign fource loadcells to mesure the weight (ie force) being applied. The first step was a proof of concept model which used a single loadcell as a scale and printed the weight. The loadcell was a wheatestone bridge type which was connected to an HX711; a specialized amplifer for these types of loadcells. The output of the HX711 was digital and made it easily captured by an Arduino Nano which used serial (UART) communication to desplay the results on a monitor.
 
 The concept model was two circular plates with the four loadcells in between positioned an equal distance for the center and aligned at 90 degrees. This layout was changed early on in the development of the full scale model for serval factors:
 - Calculating the geometry of the system was more complex
 - Limitations in supply/availibilty of material (turn rectangles into circles)
 
-For these reasons we opted for two rectangular plates; the top plate is `3x4x1/4` and the bottom plate is `5x4x1/4`. The top plate is centered over the bottom plate with an inch margin on the left and right sides of the force gauge. The top plate is smaller to provide a concentrate area to deliver the force as well as the requirements of the loadcells.
+For these reasons we opted for two rectangular plates; the top plate is `3x4x1/4` and the bottom plate is `5x4x1/4`. The top plate is centered over the bottom plate with an inch margin on the left and right sides of the force gauge. The top plate is smaller to provide a concentrate area to deliver the force as well as the requirements of the loadcell's placement.
 
+#### Microcontrollers
+_TODO:_ describe thier role
+
+### Intercommunication
+_TODO:_ How they are connected
 
 ## Software Design
 ### System Design
