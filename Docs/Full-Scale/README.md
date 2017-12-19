@@ -143,9 +143,9 @@ Since only the value is sent in the POST request body, we can convert it directl
 `template.convertAndSend(...)` will send a websocket message made of an index integer and a float to all the subscribers of the /data/sub websocket. 
 
 ### System-Software-Communication
-TODO: add image
-![communication diagram image](communication_diagram.jpg)
+The scale has a built in analog to serial conversion (TODO: confirm this), which means the arduino can do a serial read using serial pins. The arduino will then send the number as a string of characters and a new line to the beaglebone using UART (TX/RX pins on both) which nis read by a python script. The beaglebone will take the values and send them over the local network to the computer running the java web server. The connection from the beaglebone to the computer / webserver is done over usb network sharing. The web server will then use the network to send websockets to the clients. 
 
+![communication diagram image](communication_diagram.jpg)
 ## Development Software
 
 ### Arduino
