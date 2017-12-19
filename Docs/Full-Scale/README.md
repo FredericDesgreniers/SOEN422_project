@@ -138,3 +138,27 @@ public ResponseEntity<String> data(@RequestBody String body) {
 
 Since only the value is sent in the POST request body, we can convert it directly to a float using `float.valueOf(body)`. 
 `template.convertAndSend(...)` will send a websocket message made of an index integer and a float to all the subscribers of the /data/sub websocket. 
+
+## Development Software
+
+### Arduino
+TODO: Add software / programs used
+### Beaglebone
+
+#### Vim / Nano
+Used for code / config editing. Both were are installed by default on the linux distribution. 
+
+#### Cape manager
+Used to add the UART overlay. Installed by default.
+
+#### Python
+Used for scriping.
+
+`PySerial` was downloaded using python's pip command, also installed by default. 
+
+### External
+Java was used to run the webserver.
+
+Intellij was used for creating the java web server along with maven for dependency management. 
+
+Putty and Ubunutu subsystem for windows were used to shh into the beaglebone.
