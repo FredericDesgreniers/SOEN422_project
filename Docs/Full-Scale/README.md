@@ -76,7 +76,7 @@ TODO: Arduino subsystem
 
 #### Beaglebone - Python
 A python script was used to bridge the communication between the arduino and the java web server. The script used a library called PySerial. 
-```
+```python
 import serial
 import requests
 
@@ -101,39 +101,38 @@ The webpage uses a chart library (CanvasJS) and websockets in order to constantl
 The spring boot application enables websocets using `@EnableWebSocketMessageBroker` on the main config class. 
 
 It then registers a web socket entry point using
-```
+```java
 @Override
-    public void configureMessageBroker(MessageBrokerRegistry config) {
-        config.enableSimpleBroker("/data");
-        ...
+public void configureMessageBroker(MessageBrokerRegistry config) {
+    config.enableSimpleBroker("/data");
+    ...
 }
 ```
 That makes it so a client can connect to a websocket using /data/sub.
 
 This can be seen in the javascript code:
-```
+```javascript
 stompClient.subscribe('/data/sub', function (message){
-            var dataToShow = JSON.parse(message.body);
-            dps.push({
-                x: dataToShow.time,
-                y: dataToShow.force
-            });
-            if (dps.length > dataLength) {
-                dps.shift();
-            }
-            chart.render();
+    var dataToShow = JSON.parse(message.body);
+    dps.push({
+        x: dataToShow.time,
+        y: dataToShow.force
+    });
+    if (dps.length > dataLength) {
+        dps.shift();
+    }
+    chart.render();
 });
 ```
 It subscribes to /data/sub and then pushes a new value to the chart every time a message gets received. 
 Every time a value is sent to /data using POST, this method gets triggered: 
+```java
+@RequestMapping("/data")
+public ResponseEntity<String> data(@RequestBody String body) {
 
-```
- @RequestMapping("/data")
-    public ResponseEntity<String> data(@RequestBody String body) {
+    template.convertAndSend("/data/sub", new DataMessage(index.getAndIncrement(), Float.valueOf(body)));
 
-        template.convertAndSend("/data/sub", new DataMessage(index.getAndIncrement(), Float.valueOf(body)));
-
-        return ResponseEntity.status(200).build();
+    return ResponseEntity.status(200).build();
 }
 ```
 
