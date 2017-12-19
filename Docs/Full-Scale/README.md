@@ -74,7 +74,7 @@ TODO: Described arduino software
 **BeagleBone**
 On the bealebone, a python program was used in order to bridge communication between the arduino and the web server used to render a chart of the force applied.
 
-The python program was the  meant to send the values using an http POST request to a java webserver, also hosted on the beaglebone. However, the server ended up being hosted an external computer due to a faillure to get some of the dependencies to work on the beaglebone's version of Debian. 
+The python program was meant to send the values using an http POST request to a java webserver, also hosted on the beaglebone. However, the server ended up being hosted an external computer due to a faillure to get some of the dependencies to work on the beaglebone's version of Debian. 
 
 ### Subsystems
 
