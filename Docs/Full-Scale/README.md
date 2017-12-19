@@ -45,8 +45,7 @@ The concept model was two circular plates with the four loadcells in between pos
 - Calculating the geometry of the system was more complex
 - Limitations in supply/availibilty of material (turn rectangles into circles)
 
-For these reasons we opted for two rectangular plates; the top plate is `3x4x1/4` and the bottom plate is `5x4x1/4`. The top plate is centered over the bottom plate with an inch margin on the left and right sides of the force gauge.
-
+For these reasons we opted for two rectangular plates; the top plate is `3x4x1/4` and the bottom plate is `5x4x1/4`. The top plate is centered over the bottom plate with an inch margin on the left and right sides of the force gauge. The top plate is smaller to provide a concentrate area to deliver the force as well as the requirements of the loadcells.
 
 ## Design
 **Components** | **Dimensions (in)**
