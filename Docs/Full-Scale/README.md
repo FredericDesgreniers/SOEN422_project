@@ -4,22 +4,24 @@ In this project we aimed to develop a force gauge which was capable of detecting
 > To best view this document, use the [link](https://github.com/FredericDesgreniers/SOEN422_project/blob/master/Docs/Full-Scale/README.md) provided.
 
 ### Table of Contents
-1. [Contributors](#Contributors)
+1. [Contributors](#contributors)
 1. [Introduction](#introduction)
-1. [Description](#Description)
+1. [Description](#description)
    1. [Name](#name)
    1. [function](#function)
    1. [performance](#performance)
    1. [scope of complition](#scope-of-completion)
-1. [Hardware Design](#Hardware-Design)
-   1. [System](#System)
-   1. [Subsystems](#Subsystems)
-   1. [intercommunication](#Intercommunication)
-1. [Software Design](#Software-Design)
-   1. [System Design](#System-Design)
-   1. [Subsystems](#Subsystems)
-      1. [Arduino Functions](#Arduino)
-      1. [System Communication](#beaglebone---python)
+1. [Hardware Design](#hardware-design)
+   1. [System](#system)
+   1. [Subsystems](#subsystems)
+   1. [intercommunication](#intercommunication)
+1. [Software Design](#software-design)
+   1. [System Design](#system-design)
+   1. [Subsystems](#subsystems)
+      1. [Arduino Functions](#arduino)
+      1. [BeagleBone functions](#beaglebone---python)
+      1. [External functions](#external)
+   1. [System Software Communication](#system-software-communication)
 1. [development software/enviroments]()
 1. [system delivery]()
    1. [initialisation]()
@@ -94,6 +96,7 @@ The code then reads a set of characters (seperated by a new line) and sends it u
 
 TODO: Go into more detial on how serial.Serial and ser.readline() work.
 
+### External
 #### Java
 A java webserver using the Spring Boot framework is responsible for displaying the values sent by the python server on a web page. 
 The webpage uses a chart library (CanvasJS) and websockets in order to constantly update the values. 
@@ -138,6 +141,10 @@ public ResponseEntity<String> data(@RequestBody String body) {
 
 Since only the value is sent in the POST request body, we can convert it directly to a float using `float.valueOf(body)`. 
 `template.convertAndSend(...)` will send a websocket message made of an index integer and a float to all the subscribers of the /data/sub websocket. 
+
+### System-Software-Communication
+TODO: add image
+![communication diagram image](communication_diagram.jpg)
 
 ## Development Software
 
