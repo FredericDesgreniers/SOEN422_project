@@ -3,7 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27004.2006
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "HX7", "HX7\HX7.vcxproj", "{C5F80730-F44F-4478-BDAE-6634EFC2CA88}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "HX711-Test", "HX711-Test\HX711-Test.vcxproj", "{C5F80730-F44F-4478-BDAE-6634EFC2CA88}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Calibration", "Calibration\Calibration.vcxproj", "{99B5F04E-E319-4810-8D05-A1A48F992C19}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Force-Gauge", "Force-Gauge\Force-Gauge.vcxproj", "{8C406CEA-7853-4071-8257-33CF7EA2FC7D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +19,14 @@ Global
 		{C5F80730-F44F-4478-BDAE-6634EFC2CA88}.Debug|x86.Build.0 = Debug|Win32
 		{C5F80730-F44F-4478-BDAE-6634EFC2CA88}.Release|x86.ActiveCfg = Release|Win32
 		{C5F80730-F44F-4478-BDAE-6634EFC2CA88}.Release|x86.Build.0 = Release|Win32
+		{99B5F04E-E319-4810-8D05-A1A48F992C19}.Debug|x86.ActiveCfg = Debug|Win32
+		{99B5F04E-E319-4810-8D05-A1A48F992C19}.Debug|x86.Build.0 = Debug|Win32
+		{99B5F04E-E319-4810-8D05-A1A48F992C19}.Release|x86.ActiveCfg = Release|Win32
+		{99B5F04E-E319-4810-8D05-A1A48F992C19}.Release|x86.Build.0 = Release|Win32
+		{8C406CEA-7853-4071-8257-33CF7EA2FC7D}.Debug|x86.ActiveCfg = Debug|Win32
+		{8C406CEA-7853-4071-8257-33CF7EA2FC7D}.Debug|x86.Build.0 = Debug|Win32
+		{8C406CEA-7853-4071-8257-33CF7EA2FC7D}.Release|x86.ActiveCfg = Release|Win32
+		{8C406CEA-7853-4071-8257-33CF7EA2FC7D}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
