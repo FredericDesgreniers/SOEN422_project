@@ -21,7 +21,7 @@
     <ClInclude Include="HX711.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="__vm\.HX711-Test.vsarduino.h">
+    <ClInclude Include="__vm\.Calibration.vsarduino.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -31,6 +31,6 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="HX711-Test.ino" />
+    <None Include="Calibration.ino" />
   </ItemGroup>
 </Project>
