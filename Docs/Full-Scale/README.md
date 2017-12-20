@@ -81,17 +81,11 @@ This is the hardware which connects the force gauge to the arduino. it works by 
 #### System Design
 The software was responsible for transfering the values outputed by the scale from the arduino to the beaglebone and finalyl to the webserver. 
 
-**Arduino**
-TODO: Described arduino software
+**Arduino**: a c++ program read the output data from the force gauge and forward the information to the beaglebone.
 
-**BeagleBone**
-On the bealebone, a python program was used in order to bridge communication between the arduino and the web server used to render a chart of the force applied.
+**BeagleBone**: a python program was used in order to bridge communication between the arduino and the web server used to render a chart of the force applied.
 
-The python program was meant to send the values using an http POST request to a java webserver, also hosted on the beaglebone. However, the server ended up being hosted an external computer due to a faillure to get newer versions of java working on the beaglebone. 
-
-The library used for websockets is java 8+, however the beaglebone defaults to java 7 when installing using the normal methods. At the time we found out about it, it was too late to change the functionality in order to support java 7. We tried installing java 8 or 9 on the beaglebone but had problems due to what seemed like an incompatible kernel. 
-
-We also had a problem with space management on the beaglebone since their wasn't enough space for the python libraries, the source code, java and all the java dependencies. This was mostly due to a faillure when selecting the web framework since spring-boot is far from lightweight. Looking back, using a handmade c++ or python webserver would have been a better solution. 
+**Web Application**: Store a small history of the data points and display them on a graph showing the user the results of each impact.
 
 #### Subsystems
 ###### Arduino
@@ -289,6 +283,13 @@ _TODO_
 * wiring
 * communication
 * calibrating
+
+###### Web server + application
+The python program was meant to send the values using an http POST request to a java webserver, also hosted on the beaglebone. However, the server ended up being hosted an external computer due to a faillure to get newer versions of java working on the beaglebone. 
+
+The library used for websockets is java 8+, however the beaglebone defaults to java 7 when installing using the normal methods. At the time we found out about it, it was too late to change the functionality in order to support java 7. We tried installing java 8 or 9 on the beaglebone but had problems due to what seemed like an incompatible kernel. 
+
+We also had a problem with space management on the beaglebone since their wasn't enough space for the python libraries, the source code, java and all the java dependencies. This was mostly due to a faillure when selecting the web framework since spring-boot is far from lightweight. Looking back, using a handmade c++ or python webserver would have been a better solution. 
 
 ## Apendix
 #### Figure 1
