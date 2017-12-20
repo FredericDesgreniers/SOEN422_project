@@ -62,14 +62,20 @@ The concept model, see [Figure 2](#figure-2), was two circular plates with the f
 
 For these reasons we opted for two rectangular plates; the top plate is `3x4x1/4` and the bottom plate is `5x4x1/4`. The top plate is centered over the bottom plate with an inch margin on the left and right sides of the force gauge. The top plate is smaller to provide a concentrate area to deliver the force as well as the requirements of the loadcell's placement.
 
-#### Microcontrollers
-_TODO:_ describe thier role
+###### Microcontrollers
+**Arduino**'s role was to read and compute the data outputed from the force gauge through the amplifier. Reading the digital output it would convert this using offsets and scaling to determine the number of pounds which it would then output.
 
-### Intercommunication
-_TODO:_ How they are connected
+**BeagleBone**'s role was read the output from the arduino and forward the information to the web application using the network connection.
+
+#### Intercommunication
+**Force Gauge** --> **Arduino**: Wheatestone bridge senors like our load cells procude an analog output, this is passed though an amplifier, namely our HX711, which is designed to convert our analog output to a digital input for the arduino. In order to read all four load through one input of the HX711, the load cells were wired in parellel.
+
+**Arduino** --> **BeagleBone**: In order to get the data onto the web server, we needed a network connection. Our arduino forwarded all the data through a UART communication with the beaglebone.
+
+**BeagleBone** --> **Web Server**: Using it's network connection the BeagleBone would open a web socket with the web application and using HTTP post method is would tranmit the data would could then be added to the graph.
 
 ## Software Design
-### System Design
+#### System Design
 The software was responsible for transfering the values outputed by the scale from the arduino to the beaglebone and finalyl to the webserver. 
 
 **Arduino**
