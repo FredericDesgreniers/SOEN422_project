@@ -22,12 +22,10 @@ In this project we aimed to develop a force gauge which was capable of detecting
       1. [BeagleBone functions](#beaglebone---python)
       1. [External functions](#external)
    1. [System Software Communication](#system-software-communication)
-1. [development software/enviroments]()
+1. [Development Software and Enviroments](#Development-Software)
 1. [system delivery](#system-delivery)
    1. [initialisation](#system-initialisation)
    1. [operation](#system-operation)
-1. [discussion]()
-1. [Development Software and Enviroments](#Development-Software)
 1. [Discussion](#Discussion)
 1. [Apendix](#Apendix)
 
@@ -98,7 +96,6 @@ ser.close()
 ```
 
 ##### Code Explanation
-
 `serial.Serial('/dev/ttyO2',9600)` opens the uart2 port (ttyO2) for communication with a baudrate of 9600. `PySerial` itself [will call `os.open()`](https://github.com/pyserial/pyserial/blob/92d101613be41ecb2f2054c3f43a006fbe6f9966/serial/serialposix.py#L265) using the port name which will return a file descriptor, which in this case is a handle to the port. 
 
 [`ser.readline()` from `io::IoBase`](https://docs.python.org/2/library/io.html#io.IOBase.readline) is a standard python method that reads a stream by calling the `IoBase::read()` method until a new line is found. 
