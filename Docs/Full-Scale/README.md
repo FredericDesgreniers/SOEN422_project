@@ -171,8 +171,7 @@ while True:
 ser.close() 
 ```
 
-##### Code Explanation
-`serial.Serial('/dev/ttyO2',9600)` opens the uart2 port (ttyO2) for communication with a baudrate of 9600. `PySerial` itself [will call `os.open()`](https://github.com/pyserial/pyserial/blob/92d101613be41ecb2f2054c3f43a006fbe6f9966/serial/serialposix.py#L265) using the port name which will return a file descriptor, which in this case is a handle to the port. 
+The `serial.Serial('/dev/ttyO2',9600)`call opens the uart2 port (ttyO2) for communication with a baudrate of 9600. `PySerial` itself [will call `os.open()`](https://github.com/pyserial/pyserial/blob/92d101613be41ecb2f2054c3f43a006fbe6f9966/serial/serialposix.py#L265) using the port name which will return a file descriptor, which in this case is a handle to the port. 
 
 [`ser.readline()` from `io::IoBase`](https://docs.python.org/2/library/io.html#io.IOBase.readline) is a standard python method that reads a stream by calling the `IoBase::read()` method until a new line is found. 
 
@@ -181,8 +180,7 @@ The `read()` method is [overriden by `PySerial`](https://github.com/pyserial/pys
 `requests.post(..)` is part of the standard python libraries and makes a standard http post request the local java server. 
 
 
-### External
-#### Java
+###### Web Server - Java
 A java webserver using the Spring Boot framework is responsible for displaying the values sent by the python server on a web page. 
 The webpage uses a chart library (CanvasJS) and websockets in order to constantly update the values. 
 
@@ -227,29 +225,29 @@ public ResponseEntity<String> data(@RequestBody String body) {
 Since only the value is sent in the POST request body, we can convert it directly to a float using `float.valueOf(body)`. 
 `template.convertAndSend(...)` will send a websocket message made of an index integer and a float to all the subscribers of the /data/sub websocket. 
 
-### System-Software-Communication
+#### System Software Communication
 The scale has a built in analog to serial conversion (TODO: confirm this), which means the arduino can do a serial read using serial pins. The arduino will then send the number as a string of characters and a new line to the beaglebone using UART (TX/RX pins on both) which nis read by a python script. The beaglebone will take the values and send them over the local network to the computer running the java web server. The connection from the beaglebone to the computer / webserver is done over usb network sharing. The web server will then use the network to send websockets to the clients. 
 
 ![communication diagram image](communication_diagram.jpg)
 
 ## Development Software
 
-### Arduino
+#### Arduino
 TODO: Add software / programs used
 
-### Beaglebone
-#### Vim / Nano
+#### Beaglebone
+###### Vim / Nano
 Used for code / config editing on the beaglebone. Both were are installed by default on the linux distribution. 
 
-#### Cape manager
+###### Cape manager
 Used to add the UART overlay. Installed by default.
 
-#### Python
+###### Python
 Used for scriping.
 
 `PySerial` was downloaded using python's pip command, also installed by default. 
 
-### External
+#### External
 Java was used to run the webserver.
 
 Intellij was used for creating the java web server along with maven for dependency management and packaging. 
@@ -259,37 +257,28 @@ Maven dependencies we're all from the spring-boot framework.
 Putty and Ubunutu subsystem for windows were used to shh into the beaglebone.
 
 ## System Delivery
-### System Initialisation 
-#### Arduino
+#### System Initialisation 
+###### Arduino
+Flash the main force gauge sketch to the arduio.
 
-TODO: Initialize arudino system
+###### Beaglebone
+**Shell**: `sudo gateway default add 192.168.7.1` and `echo "nameserver 8.8.8.8" > etc/resolv.conf` will enable the beaglebone to use the external computers internet connection. 
 
-#### Beaglebone
-##### Shell
-`sudo gateway default add 192.168.7.1` and `echo "nameserver 8.8.8.8" > etc/resolv.conf` will enable the beaglebone to use the external computers internet connection. 
+**Python**: `sudo pip install PySerial` will install the dependency required for uart communication.
 
-##### Python
-`sudo pip install PySerial` will install the dependency required for uart communication.
+**UART**: In userspace run `sudo sh -c "echo UART2 > /sys/devices/platform/bone_capemgr/slots"` which will add the uart2 tree overlay
 
-In `su` mode: `sudo echo uart2 > /sys/devices/platform/bone_capemgr/slots` will add the uart2 tree overlay
+###### Windows Computer
+**Network**: Enable internet sharing on the proper network adapter (the one connected to the internet). 
 
-#### Windows Computer
-##### Network
-Enable internet sharing on the proper network adapter (the one connected to the internet). 
+**Web Server**: Install a java 8+ jdk [ like the oracle one ](http://www.oracle.com/technetwork/java/javase/downloads/jdk9-downloads-3848520.html). Another option is [openjdk](http://openjdk.java.net/install/index.html).
+Install [apache maven](https://maven.apache.org/). In the /website source code directory, run `mvnw clean`, `mvnw validate` and `mvnw package`. This will create a jar in the /target directory that can be run. 
 
-##### External web server
-Install a java 8+ jdk [ like the oracle one ](http://www.oracle.com/technetwork/java/javase/downloads/jdk9-downloads-3848520.html). Another option is [openjdk](http://openjdk.java.net/install/index.html)
+To deploy the web application, in no particular order, start the java server using `java -jar {jar-name}` where the jar name is the jar found in the /target directory and plug in the arduino to the beaglebones power, ground and appropriate uart pins.
 
-Install [apache maven](https://maven.apache.org/). In the /website source code directory, run `mvnw clean`, `mvnw validate` and `mvnw package`. 
+Once that is setup, turn on the beaglebone and run the python script by calling `python driver.py`. Once this is done, opening http://127.0.0.1:8080 on the computer/web server should create a webpage with a graph. 
 
-This will create a jar in the /target directory that can be run. 
-
-#### Running
-In no particular order, start the java server using `java -jar {jar-name}` where the jar name is the jar found in the /target directory and plug in the arduino to the beaglebones power, ground and appropriate uart pins.
-
-Once that is setup, turn on the beaglebone and run the python script by calling `python driver.py`. Once this is done, opening http://127.0.0.1:8080 on the computer should create a webpage with a graph. 
-
-### System Operation
+#### System Operation
 Once everything is initialized and plugged in, no further interaction is required besides opening the web page previously mentioned. Values should appear on the graph as soon as weight is applied to the scale. 
 
 ## Discussion
@@ -302,13 +291,13 @@ _TODO_
 * calibrating
 
 ## Apendix
-### Figure 1
+#### Figure 1
 ![proto type](https://user-images.githubusercontent.com/16867443/33049867-0507c6fe-ce30-11e7-84e0-2e0c05b6bfcf.jpg)
-### Figure 2
+#### Figure 2
 ![concept modle](https://user-images.githubusercontent.com/16867443/33038124-a067f7a6-ce01-11e7-8dc8-f3b6b804d6f7.png)
-### Figure 3
+#### Figure 3
 ![system](https://user-images.githubusercontent.com/16867443/34211655-ca056dfa-e567-11e7-89f4-f3b61ca5a881.jpg)
-### Figure 4
+#### Figure 4
 ![calibration](https://user-images.githubusercontent.com/16867443/34211678-dac03db4-e567-11e7-9c89-6a21962e2ef7.jpg)
-### Figure 5
+#### Figure 5
 ![deformation](https://user-images.githubusercontent.com/16867443/34211718-f7811b1c-e567-11e7-951a-ff1400bf1653.jpg)
