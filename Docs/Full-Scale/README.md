@@ -46,11 +46,11 @@ The system would include a web server and with an internet connection allowing u
 It is designed to capture the force from various types of punchs, meaning it is responsive enough to capture a quick double jab and strong enough to handle a left hook. Users are able to display the force in pounds, kilos, or newtons and track sessions to see the greatest force applied during their training.
 
 #### Scope of Completion
-The project succeded is producing a functional prototype which was able to capture the force applied and displayed the results through a web interface. However the lantency of the system was never refined to be low enough to capture a punch reliably.
+The project succeded is producing a functional prototype which was able to capture the force applied and displayed the results through a web interface. However the lantency of the system was never refined to be low enough to capture a punch reliably. In addition the force gauge did experience some deformation under strong impacts, see [Figure 5](#figure-5), thought this did not degrade accuracy.
 
 ## Hardware Design
 #### System
-The system is comprised of three components; a force gauge, an arduino microcontroller, and a beaglebone black. Together they registered, interpolated and presented the data to provide a smooth user experience. Additionally an external machine was used to run the webserver to allow for better connectivity.
+The system is comprised of three components; a force gauge, an arduino microcontroller, and a beaglebone black. Together they registered, interpolated and presented the data to provide a smooth user experience. Additionally an external machine was used to run the webserver to allow for better connectivity. An example of the system can seen in [Figure 4](#figure-4).
 
 #### Subsystems
 ###### Force Gauge
@@ -95,7 +95,7 @@ We also had a problem with space management on the beaglebone since their wasn't
 
 #### Subsystems
 ###### Arduino
-There are two main C++ applications used on the Arduino. The first is the calibration sketch which allows for the calculation of this calibration factor. The HX711 and its adjacent [library](https://github.com/bogde/HX711) output a digital value in grams, however this is not always true depending on the scale. In our case we wanted to use pounds as our units, as such we placed various weights on our scale and adjusted the `calibration_factor` until all the weight's were properly reported. The main application, in other words the one used for the system, uses the calculated `calibration_factor` and serial writes the data.
+There are two main C++ applications used on the Arduino. The first is the calibration sketch which allows for the calculation of this calibration factor. The HX711 and its adjacent [library](https://github.com/bogde/HX711) output a digital value in grams, however this is not always true depending on the scale. In our case we wanted to use pounds as our units, as such we placed various weights on our scale and adjusted the `calibration_factor` until all the weight's were properly reported, see [Figure 4](#figure-4). The main application, in other words the one used for the system, uses the calculated `calibration_factor` and serial writes the data.
 
 The key behind this is the [library](https://github.com/bogde/HX711) being utilized. The main application (using arduino for the UART) is as follows:
 ```C++
