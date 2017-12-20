@@ -22,7 +22,7 @@ In this project we aimed to develop a force gauge which was capable of detecting
       1. [BeagleBone Functions](#beaglebone)
       1. [External Functions](#Web-Server)
    1. [System Software Communication](#system-software-communication)
-1. [Development Software and Enviroments](#Development-Software)
+1. [Development Software and Enviroments](#development-software)
 1. [System Delivery](#system-delivery)
    1. [Initialisation](#system-initialisation)
    1. [Operation](#system-operation)
@@ -225,30 +225,21 @@ The scale has a built in analog to serial conversion (TODO: confirm this), which
 ![communication diagram image](communication_diagram.jpg)
 
 ## Development Software
-
 #### Arduino
-TODO: Add software / programs used
+- The arduino programs were written in Visual Studio (Enterprise 2017)
+- Visual Micro was used to link visual studio to the arduino compilers, linkers, loaders, etc.
+- Arduino IDE was installed for all the tools and drivers required
 
 #### Beaglebone
-###### Vim / Nano
-Used for code / config editing on the beaglebone. Both were are installed by default on the linux distribution. 
-
-###### Cape manager
-Used to add the UART overlay. Installed by default.
-
-###### Python
-Used for scriping.
-
-`PySerial` was downloaded using python's pip command, also installed by default. 
+- Vim / Nano was used for coding and editing configuration files on the beaglebone. Both were are installed by default with the linux distribution. 
+- Cape manager waas used to add the UART overlay. Installed by default.
+- Python was used for scriping. `PySerial` was downloaded using python's pip command, also installed by default. 
 
 #### External
-Java was used to run the webserver.
-
-Intellij was used for creating the java web server along with maven for dependency management and packaging. 
-
-Maven dependencies we're all from the spring-boot framework. 
-
-Putty and Ubunutu subsystem for windows were used to shh into the beaglebone.
+- Java was used to run the webserver.
+- Intellij was used for creating the java web server along with maven for dependency management and packaging. 
+- Maven dependencies we're all from the spring-boot framework. 
+- Putty and Ubunutu subsystem for windows were used to shh into the beaglebone.
 
 ## System Delivery
 #### System Initialisation 
