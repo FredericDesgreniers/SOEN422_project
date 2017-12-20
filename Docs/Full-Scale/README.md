@@ -70,7 +70,11 @@ TODO: Described arduino software
 **BeagleBone**
 On the bealebone, a python program was used in order to bridge communication between the arduino and the web server used to render a chart of the force applied.
 
-The python program was meant to send the values using an http POST request to a java webserver, also hosted on the beaglebone. However, the server ended up being hosted an external computer due to a faillure to get some of the dependencies to work on the beaglebone's version of Debian. 
+The python program was meant to send the values using an http POST request to a java webserver, also hosted on the beaglebone. However, the server ended up being hosted an external computer due to a faillure to get newer versions of java working on the beaglebone. 
+
+The library used for websockets is java 8+, however the beaglebone defaults to java 7 when installing using the normal methods. At the time we found out about it, it was too late to change the functionality in order to support java 7. We tried installing java 8 or 9 on the beaglebone but had problems due to what seemed like an incompatible kernel. 
+
+We also had a problem with space management on the beaglebone since their wasn't enough space for the python libraries, the source code, java and all the java dependencies. This was mostly due to a faillure when selecting the web framework since spring-boot is far from lightweight. Looking back, using a handmade c++ or python webserver would have been a better solution. 
 
 ### Subsystems
 #### Arduino
@@ -159,7 +163,7 @@ TODO: Add software / programs used
 ### Beaglebone
 
 #### Vim / Nano
-Used for code / config editing. Both were are installed by default on the linux distribution. 
+Used for code / config editing on the beaglebone. Both were are installed by default on the linux distribution. 
 
 #### Cape manager
 Used to add the UART overlay. Installed by default.
@@ -172,6 +176,8 @@ Used for scriping.
 ### External
 Java was used to run the webserver.
 
-Intellij was used for creating the java web server along with maven for dependency management. 
+Intellij was used for creating the java web server along with maven for dependency management and packaging. 
+
+Maven dependencies we're all from the spring-boot framework. 
 
 Putty and Ubunutu subsystem for windows were used to shh into the beaglebone.
