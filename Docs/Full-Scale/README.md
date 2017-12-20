@@ -27,7 +27,7 @@ In this project we aimed to develop a force gauge which was capable of detecting
    1. [initialisation](#system-initialisation)
    1. [operation](#system-operation)
 1. [discussion]()
-1. [Apendix]()
+1. [Apendix](#Apendix)
 
 ## Contributors
 **Name** | **ID**
@@ -42,13 +42,13 @@ The project succeded is producing a functional prototype which was able to captu
 
 ## Hardware Design
 ### System
-_TODO:_ describe overall system
+The system is comprised of three components; a force gauge, an arduino microcontroller, and a beaglebone black. Together they registered, interpolated and presented the data to provide a smooth user experience. Additionally an external machine was used to run the webserver to allow for better connectivity.
 
 ### Subsystems
 #### Force Gauge
-The main hardware component is the force gauge itself, this went through many phases thought stuck with the initial concept of usign fource loadcells to mesure the weight (ie force) being applied. The first step was a proof of concept model which used a single loadcell as a scale and printed the weight. The loadcell was a wheatestone bridge type which was connected to an HX711; a specialized amplifer for these types of loadcells. The output of the HX711 was digital and made it easily captured by an Arduino Nano which used serial (UART) communication to desplay the results on a monitor.
+The main hardware component is the force gauge itself, this went through many phases thought stuck with the initial concept of usign fource loadcells to mesure the weight (ie force) being applied. The first step was a proof of concept model, see [Figure 1](#figure-1), which used a single loadcell as a scale and printed the weight. The loadcell was a wheatestone bridge type which was connected to an HX711; a specialized amplifer for these types of loadcells. The output of the HX711 was digital and made it easily captured by an Arduino Nano which used serial (UART) communication to desplay the results on a monitor.
 
-The concept model was two circular plates with the four loadcells in between positioned an equal distance for the center and aligned at 90 degrees. This layout was changed early on in the development of the full scale model for serval factors:
+The concept model, see [Figure 2](#figure-2), was two circular plates with the four loadcells in between positioned an equal distance for the center and aligned at 90 degrees. This layout was changed early on in the development of the full scale model for serval factors:
 - Calculating the geometry of the system was more complex
 - Limitations in supply/availibilty of material (turn rectangles into circles)
 
@@ -181,6 +181,17 @@ Intellij was used for creating the java web server along with maven for dependen
 Maven dependencies we're all from the spring-boot framework. 
 
 Putty and Ubunutu subsystem for windows were used to shh into the beaglebone.
+## Apendix
+### Figure 1
+![proto type](https://user-images.githubusercontent.com/16867443/33049867-0507c6fe-ce30-11e7-84e0-2e0c05b6bfcf.jpg)
+### Figure 2
+![concept modle](https://user-images.githubusercontent.com/16867443/33038124-a067f7a6-ce01-11e7-8dc8-f3b6b804d6f7.png)
+### Figure 3
+![system](https://user-images.githubusercontent.com/16867443/34211655-ca056dfa-e567-11e7-89f4-f3b61ca5a881.jpg)
+### Figure 4
+![calibration](https://user-images.githubusercontent.com/16867443/34211678-dac03db4-e567-11e7-9c89-6a21962e2ef7.jpg)
+### Figure 5
+![deformation](https://user-images.githubusercontent.com/16867443/34211718-f7811b1c-e567-11e7-951a-ff1400bf1653.jpg)
 
 ## System Delivery
 ### System Initialisation 
