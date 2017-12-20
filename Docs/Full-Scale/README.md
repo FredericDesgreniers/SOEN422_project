@@ -284,6 +284,12 @@ For the arduino part, we used c++ without much other consideration since it allo
 
 For the beaglebone, the chocie was mostly between c++, python and java. Python was chosen because it had the most easy to use and mature libraries for communication. Java was chosen for the webserver since it initially looked like a decent idea to use a mature web framework such as spring boot. This ended up being a bad decision since using java on the arduino took up a lot of memory. Spring is also a very bloated framework that includes a lot of unncessary things. In the end, c++ would have been the better choice because it's lightweight and the functions we needed out of the webserver would have been straightforward to implement (http page + websockets). 
 
+##### Wiring
+TODO: arduino wirring 
+
+The main problem with the beaglebone's wiring was figuring out how to enable the proper pins and which pins we needed to connect wires too. The problem was fixed when we switched from spi to uart since the ports were clearly identified. We also had trouble because the cape_universal overlay disabled the uart pins, this was fixed by removing the overlay from the cape manager configuration. 
+
+
 ###### Web server + application
 The python program was meant to send the values using an http POST request to a java webserver, also hosted on the beaglebone. However, the server ended up being hosted an external computer due to a faillure to get newer versions of java working on the beaglebone. 
 
