@@ -256,7 +256,7 @@ Flash the main force gauge sketch to the arduio.
 ###### Windows Computer
 **Network**: Enable internet sharing on the proper network adapter (the one connected to the internet). 
 
-**Web Server**: Install a java 8+ jdk [ like the oracle one ](http://www.oracle.com/technetwork/java/javase/downloads/jdk9-downloads-3848520.html). Another option is [openjdk](http://openjdk.java.net/install/index.html).
+**Web Server**: Install a java 8+ jdk [like the oracle one](http://www.oracle.com/technetwork/java/javase/downloads/jdk9-downloads-3848520.html). Another option is [openjdk](http://openjdk.java.net/install/index.html).
 Install [apache maven](https://maven.apache.org/). In the /website source code directory, run `mvnw clean`, `mvnw validate` and `mvnw package`. This will create a jar in the /target directory that can be run. 
 
 To deploy the web application, in no particular order, start the java server using `java -jar {jar-name}` where the jar name is the jar found in the /target directory and plug in the arduino to the beaglebones power, ground and appropriate uart pins.
@@ -267,11 +267,8 @@ Once that is setup, turn on the beaglebone and run the python script by calling 
 Once everything is initialized and plugged in, no further interaction is required besides opening the web page previously mentioned. Values should appear on the graph as soon as weight is applied to the scale. 
 
 ## Discussion
-_TODO_
-* enginneering/machining
-* wiring
-* communication
-* calibrating
+This section expands on work done which is not present in the final prototype or is not covered in the precedding sections of the report.
+
 ###### Internet - Wifi setup
 We initially connected it using an ethernet cable, however, this method stopped working at one point for no apparent reason so we had to switch to using the usb connection for internet access. 
 
@@ -282,11 +279,20 @@ For the arduino part, we used c++ without much other consideration since it allo
 
 For the beaglebone, the chocie was mostly between c++, python and java. Python was chosen because it had the most easy to use and mature libraries for communication. Java was chosen for the webserver since it initially looked like a decent idea to use a mature web framework such as spring boot. This ended up being a bad decision since using java on the arduino took up a lot of memory. Spring is also a very bloated framework that includes a lot of unncessary things. In the end, c++ would have been the better choice because it's lightweight and the functions we needed out of the webserver would have been straightforward to implement (http page + websockets). 
 
+###### Force Gauge Engineering
+This main component went through may phases from a prototype, model to a first attempt. The leading factors which transformed the designed from [Figure 2](#figure-2) to the working model in [Figure 3](#figure-3) was the geometery and avaliable reasources. Calculating the best positions and aligning the loadcells becames far to complex so the design was switch to using squares. However at this point the diamond plate which I had was preventing the bolts from sitting correctly. The aluminum plate I had on hand was `8x4` so the final product was a rectanglar.
+
+The bolts for the loadcells were supposed to be inset to the plate so they would no be pretruding. This did not come to fruition because the bolts I aquired were made to sit flush. This later on came to haunt us. When calibrating the system and going through some initial tests, I through a straight right and my large knuckle made full contact with the bolt head. This meant that a single loadcell was under the strain of a approxiamtely 180lbs punch. The result of the impact was the thin bolt bending that skewing the geometry of the force gauge distorting the results slightly.
+
 ###### Wiring
-TODO: arduino wirring 
+There are many examples of IoT scales online which use four load cells as our design. These project often used a load cell combinator board which connected four loadcells into one wheatestone bridge circuit. Unfortunelty there was not enough research done to determine in advance that the combinator board was not for the type of loadcells which we had aquired for this project. This meant the senors needed to be wired in such a away that the four wheatestone bridge ciruits worked together to produce one uniformed output which could be utilised by out HX711. I took two days of research to finally dig up the answer in some obsure stack overflow for electrical engineering which referenced a technical paper on the subject. Plugging in the wires took all of one minute.
 
 The main problem with the beaglebone's wiring was figuring out how to enable the proper pins and which pins we needed to connect wires too. The problem was fixed when we switched from spi to uart since the ports were clearly identified. We also had trouble because the cape_universal overlay disabled the uart pins, this was fixed by removing the overlay from the cape manager configuration. 
 
+A smaller issue which came up because of the wiring was the gauge of the wires which came with the load cells. In order to have a proper connection inside a breadbord pin, the wire must be thick enough to make contact with the side wall. However the wire of the loadcells were were thin and we needed to soder thinker extension wires onto the ends of the 16 wires.
+
+###### Calibrating the Force Gause
+Our initial proof of concept used a 10kg load cell; the calibration was very easy using a 3lbs and a 10lbs weight. When scaling up to a 200kg scale, calibrating the system required heavier wieghts as the force gauge is less sensitive at lower and upper range. This means the effective range is from 5kg to 190kg. In order to have a good calibration factor I used a 20kg plate, myself and myself holding a bar with two plates. Standing on one foot on a `3x4` inch square with 135lbs on you was not easy. This difficult was a direct result of stupidity and easily could of been avoided.
 
 ###### Web server + application
 The python program was meant to send the values using an http POST request to a java webserver, also hosted on the beaglebone. However, the server ended up being hosted an external computer due to a faillure to get newer versions of java working on the beaglebone. 
