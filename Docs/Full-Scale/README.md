@@ -228,7 +228,7 @@ In no particular order, start the java server using `java -jar {jar-name}` where
 Once that is setup, turn on the beaglebone and run the python script by calling `python driver.py`. Once this is done, opening http://127.0.0.1:8080 on the computer should create a webpage with a graph. 
 
 ### System Operation
-Once everythign is initialized and plugged in, no further interaction is required besides opening the web page previously mentioned. Values should appear on the graph as soon as weight is applied to the scale. 
+Once everything is initialized and plugged in, no further interaction is required besides opening the web page previously mentioned. Values should appear on the graph as soon as weight is applied to the scale. 
 
 ## Discussion
 _TODO_
