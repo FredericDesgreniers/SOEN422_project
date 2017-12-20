@@ -23,9 +23,9 @@ In this project we aimed to develop a force gauge which was capable of detecting
       1. [External functions](#external)
    1. [System Software Communication](#system-software-communication)
 1. [development software/enviroments]()
-1. [system delivery]()
-   1. [initialisation]()
-   1. [operation]()
+1. [system delivery](#system-delivery)
+   1. [initialisation](#system-initialisation)
+   1. [operation](#system-operation)
 1. [discussion]()
 1. [Apendix]()
 
@@ -181,3 +181,34 @@ Intellij was used for creating the java web server along with maven for dependen
 Maven dependencies we're all from the spring-boot framework. 
 
 Putty and Ubunutu subsystem for windows were used to shh into the beaglebone.
+
+## System Delivery
+### System Initialisation 
+#### Arduino
+
+TODO: Initialize arudino system
+
+#### Beaglebone
+
+##### Shell
+`sudo gateway default add 192.168.7.1` and `echo "nameserver 8.8.8.8" > etc/resolv.conf` will enable the beaglebone to use the external computers internet connection. 
+
+##### Python
+`sudo pip install PySerial` will install the dependency required for uart communication
+in sh mode: `sudo echo uart2 > /sys/devices/platform/bone_capemgr/slots` will add the uart2 tree overlay
+
+#### External web server
+Install a java 8+ jdk [ like the oracle one ](http://www.oracle.com/technetwork/java/javase/downloads/jdk9-downloads-3848520.html). Another option is [openjdk](http://openjdk.java.net/install/index.html)
+
+Install [apache maven](https://maven.apache.org/). In the /website source code directory, run `mvnw clean`, `mvnw validate` and `mvnw package`. 
+
+This will create a jar in the /target directory that can be run. 
+
+#### Running
+
+In no particular order, start the java server using `java -jar {jar-name}` where the jar name is the jar found in the /target directory and plug in the arduino to the beaglebones power, ground and appropriate uart pins.
+
+Once that is setup, turn on the beaglebone and run the python script by calling `python driver.py`. Once this is done, opening http://127.0.0.1:8080 on the computer should create a webpage with a graph. 
+
+### System Operation
+Once everythign is initialized and plugged in, no further interaction is required besides opening the web page previously mentioned. Values should appear on the graph as soon as weight is applied to the scale. 
