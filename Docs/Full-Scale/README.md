@@ -95,7 +95,7 @@ ser.close()
 
 `serial.Serial('/dev/ttyO2',9600)` opens the uart2 port (ttyO2) for communication with a baudrate of 9600. `PySerial` itself [will call `os.open()`](https://github.com/pyserial/pyserial/blob/92d101613be41ecb2f2054c3f43a006fbe6f9966/serial/serialposix.py#L265) using the port name which will return a file descriptor, which in this case is a handle to the port. 
 
-[`ser.readline()` from `io::IoBase`](https://docs.python.org/2/library/io.html#io.IOBase.readline) is a standard python method that reads a stream by calling calls the `IoBase::read()` method until a new line is found. 
+[`ser.readline()` from `io::IoBase`](https://docs.python.org/2/library/io.html#io.IOBase.readline) is a standard python method that reads a stream by calling the `IoBase::read()` method until a new line is found. 
 
 The `read()` method is [overriden by `PySerial`](https://github.com/pyserial/pyserial/blob/92d101613be41ecb2f2054c3f43a006fbe6f9966/serial/serialposix.py#L471). The posix version of the PeSerial code will then call python's `select.select()` method, which [translates to a `select()` system call on linux](https://docs.python.org/2/library/select.html#select.select). This will wait until the port is ready to read and then calls `os.read()` on the serial port to read the data comming from the uart connection. 
 
