@@ -5,7 +5,7 @@ In this project we aimed to develop a force gauge which was capable of detecting
 
 ### Table of Contents
 1. [Contributors](#contributors)
-1. [Introduction](#introduction)
+1. [Introduction](##force-gauge---team-a)
 1. [Description](#description)
    1. [Name](#name)
    1. [Functionality](#Functionality)
@@ -19,7 +19,7 @@ In this project we aimed to develop a force gauge which was capable of detecting
    1. [System Design](#system-design)
    1. [Subsystems](#subsystems)
       1. [Arduino Functions](#arduino)
-      1. [BeagleBone Functions](#beaglebone---python)
+      1. [BeagleBone Functions](#beaglebone)
       1. [External Functions](#external)
    1. [System Software Communication](#system-software-communication)
 1. [Development Software and Enviroments](#Development-Software)
@@ -156,7 +156,7 @@ long HX711::read() {
 ```
 At first glance, the code looks complex, but with a little bit of reading the HX711 datasheet and research of arduino functions is makes sense. The method begins by waiting for the HX711 to be free, in other words for no one else to be reading, though in our case that is not an issue. Following this the function extracts the 24bits of data from the HX711's register, see the [HX711 hardware](#HX711) section for details, and stores it on a buffer. The gain, the channel and percision selection, is reset. And lastly the 24-bit value is translated to a 32-bit variable.
 
-###### Beaglebone - Python
+###### Beaglebone
 A python script was used to bridge the communication between the arduino and the java web server. The script used a library called PySerial. 
 ```python
 import serial
