@@ -62,6 +62,9 @@ The concept model, see [Figure 2](#figure-2), was two circular plates with the f
 
 For these reasons we opted for two rectangular plates; the top plate is `3x4x1/4` and the bottom plate is `5x4x1/4`. The top plate is centered over the bottom plate with an inch margin on the left and right sides of the force gauge. The top plate is smaller to provide a concentrate area to deliver the force as well as the requirements of the loadcell's placement.
 
+###### HX711
+This is the hardware which connects the force gauge to the arduino. it works by output a 5V to the loadcell and using the return voltage it calculates the resistence using an ADC, analog to digital conversion, which is translated to the weight in grams being stored on a 24-bit register. When the HX711 recieves a `HIGH` signal it performs a digital write of the next bit to be read.
+
 ###### Microcontrollers
 **Arduino**'s role was to read and compute the data outputed from the force gauge through the amplifier. Reading the digital output it would convert this using offsets and scaling to determine the number of pounds which it would then output.
 
@@ -90,11 +93,70 @@ The library used for websockets is java 8+, however the beaglebone defaults to j
 
 We also had a problem with space management on the beaglebone since their wasn't enough space for the python libraries, the source code, java and all the java dependencies. This was mostly due to a faillure when selecting the web framework since spring-boot is far from lightweight. Looking back, using a handmade c++ or python webserver would have been a better solution. 
 
-### Subsystems
-#### Arduino
-TODO: Arduino subsystem
+#### Subsystems
+###### Arduino
+There are two main C++ applications used on the Arduino. The first is the calibration sketch which allows for the calculation of this calibration factor. The HX711 and its adjacent [library](https://github.com/bogde/HX711) output a digital value in grams, however this is not always true depending on the scale. In our case we wanted to use pounds as our units, as such we placed various weights on our scale and adjusted the `calibration_factor` until all the weight's were properly reported. The main application, in other words the one used for the system, uses the calculated `calibration_factor` and serial writes the data.
 
-#### Beaglebone - Python
+The key behind this is the [library](https://github.com/bogde/HX711) being utilized. The main application (using arduino for the UART) is as follows:
+```C++
+#include "HX711.h"
+
+HX711 scale(PD6, PD7);
+
+void setup() {
+   Serial.begin(9600);
+   scale.set_scale(-6500);
+   scale.tare();
+}
+
+void loop() {
+   Serial.println(scale.get_units(), 4);
+}
+```
+Beginning with the instantiation of the `scale` we pass two pins; _DOUT_ or "Data OUTput" and _SCK_ or "Synchronized ClocK". Both pins have thier pin modes set to input and output respectively. Next we set our calibration factor but using `scale.set_scale(-6500)` which holds the value in a private member of the object and is used when `scale.get_units()` to convert the value read to our scale. With the scaling configured, we now call `scale.tare()` to remove the weigth of the top plates and any tension the system might be under. This tare method works by reading 10 values and calculating the average and once again sotring the value in a private member of the object. Within our loop our one and only HX711 library call is `scale.get_units()` which returns a float being the weight on the force gauge maped to out unit of choice. Behind the scene of the library, used by both `tare()` and `get_units()` is the `read()` functions which is the heart of the library because it is reponsible for exacting the values from the HX711 amplifier. The following snippet is the read function of the library.
+```c++
+long HX711::read() {
+   // wait for the chip to become ready
+   while (!is_ready()) { // bool HX711::is_ready() { return digitalRead(DOUT) == LOW; }
+      // Will do nothing on Arduino but prevent resets of ESP8266 (Watchdog Issue)
+      yield();
+   }
+
+   unsigned long value = 0;
+   uint8_t data[3] = { 0 };
+   uint8_t filler = 0x00;
+
+   // pulse the clock pin 24 times to read the data
+   data[2] = shiftIn(DOUT, PD_SCK, MSBFIRST);
+   data[1] = shiftIn(DOUT, PD_SCK, MSBFIRST);
+   data[0] = shiftIn(DOUT, PD_SCK, MSBFIRST);
+
+   // set the channel and the gain factor for the next reading using the clock pin
+   for (unsigned int i = 0; i < GAIN; i++) {
+      digitalWrite(PD_SCK, HIGH);
+      digitalWrite(PD_SCK, LOW);
+   }
+
+   // Replicate the most significant bit to pad out a 32-bit signed integer
+   if (data[2] & 0x80) {
+      filler = 0xFF;
+   }
+   else {
+      filler = 0x00;
+   }
+
+   // Construct a 32-bit signed integer
+   value = (static_cast<unsigned long>(filler) << 24
+      | static_cast<unsigned long>(data[2]) << 16
+      | static_cast<unsigned long>(data[1]) << 8
+      | static_cast<unsigned long>(data[0]));
+
+   return static_cast<long>(value);
+}
+```
+At first glance, the code looks complex, but with a little bit of reading the HX711 datasheet and research of arduino functions is makes sense. The method begins by waiting for the HX711 to be free, in other words for no one else to be reading, though in our case that is not an issue. Following this the function extracts the 24bits of data from the HX711's register, see the [HX711 hardware](#HX711) section for details, and stores it on a buffer. The gain, the channel and percision selection, is reset. And lastly the 24-bit value is translated to a 32-bit variable.
+
+###### Beaglebone - Python
 A python script was used to bridge the communication between the arduino and the java web server. The script used a library called PySerial. 
 ```python
 import serial
