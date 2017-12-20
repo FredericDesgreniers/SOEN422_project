@@ -8,8 +8,8 @@ In this project we aimed to develop a force gauge which was capable of detecting
 1. [Introduction](##force-gauge---team-a)
 1. [Description](#description)
    1. [Name](#name)
-   1. [Functionality](#Functionality)
-   1. [Performance](#Performance)
+   1. [Functionality](#functionality)
+   1. [Performance](#performance)
    1. [Scope of Completion](#scope-of-completion)
 1. [Hardware Design](#hardware-design)
    1. [System](#system)
@@ -20,14 +20,14 @@ In this project we aimed to develop a force gauge which was capable of detecting
    1. [Subsystems](#subsystems)
       1. [Arduino Functions](#arduino)
       1. [BeagleBone Functions](#beaglebone)
-      1. [External Functions](#external)
+      1. [External Functions](#Web-Server)
    1. [System Software Communication](#system-software-communication)
 1. [Development Software and Enviroments](#Development-Software)
 1. [System Delivery](#system-delivery)
    1. [Initialisation](#system-initialisation)
    1. [Operation](#system-operation)
-1. [Discussion](#Discussion)
-1. [Apendix](#Apendix)
+1. [Discussion](#discussion)
+1. [Apendix](#apendix)
 
 ## Contributors
 **Name** | **ID**
@@ -180,7 +180,7 @@ The `read()` method is [overriden by `PySerial`](https://github.com/pyserial/pys
 `requests.post(..)` is part of the standard python libraries and makes a standard http post request the local java server. 
 
 
-###### Web Server - Java
+###### Web Server
 A java webserver using the Spring Boot framework is responsible for displaying the values sent by the python server on a web page. 
 The webpage uses a chart library (CanvasJS) and websockets in order to constantly update the values. 
 
