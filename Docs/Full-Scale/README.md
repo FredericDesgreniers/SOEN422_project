@@ -181,26 +181,6 @@ Intellij was used for creating the java web server along with maven for dependen
 Maven dependencies we're all from the spring-boot framework. 
 
 Putty and Ubunutu subsystem for windows were used to shh into the beaglebone.
-## Discussion
-_TODO_
-* internet - wifi setup
-* choosing language
-* enginneering/machining
-* wiring
-* communication
-* calibrating
-
-## Apendix
-### Figure 1
-![proto type](https://user-images.githubusercontent.com/16867443/33049867-0507c6fe-ce30-11e7-84e0-2e0c05b6bfcf.jpg)
-### Figure 2
-![concept modle](https://user-images.githubusercontent.com/16867443/33038124-a067f7a6-ce01-11e7-8dc8-f3b6b804d6f7.png)
-### Figure 3
-![system](https://user-images.githubusercontent.com/16867443/34211655-ca056dfa-e567-11e7-89f4-f3b61ca5a881.jpg)
-### Figure 4
-![calibration](https://user-images.githubusercontent.com/16867443/34211678-dac03db4-e567-11e7-9c89-6a21962e2ef7.jpg)
-### Figure 5
-![deformation](https://user-images.githubusercontent.com/16867443/34211718-f7811b1c-e567-11e7-951a-ff1400bf1653.jpg)
 
 ## System Delivery
 ### System Initialisation 
@@ -226,10 +206,30 @@ Install [apache maven](https://maven.apache.org/). In the /website source code d
 This will create a jar in the /target directory that can be run. 
 
 #### Running
-
 In no particular order, start the java server using `java -jar {jar-name}` where the jar name is the jar found in the /target directory and plug in the arduino to the beaglebones power, ground and appropriate uart pins.
 
 Once that is setup, turn on the beaglebone and run the python script by calling `python driver.py`. Once this is done, opening http://127.0.0.1:8080 on the computer should create a webpage with a graph. 
 
 ### System Operation
 Once everythign is initialized and plugged in, no further interaction is required besides opening the web page previously mentioned. Values should appear on the graph as soon as weight is applied to the scale. 
+
+## Discussion
+_TODO_
+* internet - wifi setup
+* choosing language
+* enginneering/machining
+* wiring
+* communication
+* calibrating
+
+## Apendix
+### Figure 1
+![proto type](https://user-images.githubusercontent.com/16867443/33049867-0507c6fe-ce30-11e7-84e0-2e0c05b6bfcf.jpg)
+### Figure 2
+![concept modle](https://user-images.githubusercontent.com/16867443/33038124-a067f7a6-ce01-11e7-8dc8-f3b6b804d6f7.png)
+### Figure 3
+![system](https://user-images.githubusercontent.com/16867443/34211655-ca056dfa-e567-11e7-89f4-f3b61ca5a881.jpg)
+### Figure 4
+![calibration](https://user-images.githubusercontent.com/16867443/34211678-dac03db4-e567-11e7-9c89-6a21962e2ef7.jpg)
+### Figure 5
+![deformation](https://user-images.githubusercontent.com/16867443/34211718-f7811b1c-e567-11e7-951a-ff1400bf1653.jpg)
