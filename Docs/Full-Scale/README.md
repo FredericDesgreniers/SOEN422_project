@@ -274,6 +274,15 @@ _TODO_
 * wiring
 * communication
 * calibrating
+###### Internet - Wifi setup
+We initially connected it using an ethernet cable, however, this method stopped working at one point for no apparent reason so we had to switch to using the usb connection for internet access. 
+
+While the internet should be very straightforward to enable on the beaglebone using usb, we had problems making it work due to both windows not working properly and not having DHCP. This was fixed by manually adding the network gateway to the beaglebone, manually adding the ip address and re-installing network drivers on the windows machine. 
+
+###### Choosing language
+For the arduino part, we used c++ without much other consideration since it allows easy access to both low level memory and aduino specific functions.
+
+For the beaglebone, the chocie was mostly between c++, python and java. Python was chosen because it had the most easy to use and mature libraries for communication. Java was chosen for the webserver since it initially looked like a decent idea to use a mature web framework such as spring boot. This ended up being a bad decision since using java on the arduino took up a lot of memory. Spring is also a very bloated framework that includes a lot of unncessary things. In the end, c++ would have been the better choice because it's lightweight and the functions we needed out of the webserver would have been straightforward to implement (http page + websockets). 
 
 ###### Web server + application
 The python program was meant to send the values using an http POST request to a java webserver, also hosted on the beaglebone. However, the server ended up being hosted an external computer due to a faillure to get newer versions of java working on the beaglebone. 
