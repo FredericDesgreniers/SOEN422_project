@@ -27,6 +27,8 @@ In this project we aimed to develop a force gauge which was capable of detecting
    1. [initialisation](#system-initialisation)
    1. [operation](#system-operation)
 1. [discussion]()
+1. [Development Software and Enviroments](#Development-Software)
+1. [Discussion](#Discussion)
 1. [Apendix](#Apendix)
 
 ## Contributors
@@ -156,12 +158,13 @@ Since only the value is sent in the POST request body, we can convert it directl
 The scale has a built in analog to serial conversion (TODO: confirm this), which means the arduino can do a serial read using serial pins. The arduino will then send the number as a string of characters and a new line to the beaglebone using UART (TX/RX pins on both) which nis read by a python script. The beaglebone will take the values and send them over the local network to the computer running the java web server. The connection from the beaglebone to the computer / webserver is done over usb network sharing. The web server will then use the network to send websockets to the clients. 
 
 ![communication diagram image](communication_diagram.jpg)
+
 ## Development Software
 
 ### Arduino
 TODO: Add software / programs used
-### Beaglebone
 
+### Beaglebone
 #### Vim / Nano
 Used for code / config editing on the beaglebone. Both were are installed by default on the linux distribution. 
 
@@ -181,6 +184,15 @@ Intellij was used for creating the java web server along with maven for dependen
 Maven dependencies we're all from the spring-boot framework. 
 
 Putty and Ubunutu subsystem for windows were used to shh into the beaglebone.
+## Discussion
+_TODO_
+* internet - wifi setup
+* choosing language
+* enginneering/machining
+* wiring
+* communication
+* calibrating
+
 ## Apendix
 ### Figure 1
 ![proto type](https://user-images.githubusercontent.com/16867443/33049867-0507c6fe-ce30-11e7-84e0-2e0c05b6bfcf.jpg)
