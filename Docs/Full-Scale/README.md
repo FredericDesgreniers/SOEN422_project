@@ -194,8 +194,9 @@ TODO: Initialize arudino system
 `sudo gateway default add 192.168.7.1` and `echo "nameserver 8.8.8.8" > etc/resolv.conf` will enable the beaglebone to use the external computers internet connection. 
 
 ##### Python
-`sudo pip install PySerial` will install the dependency required for uart communication
-in sh mode: `sudo echo uart2 > /sys/devices/platform/bone_capemgr/slots` will add the uart2 tree overlay
+`sudo pip install PySerial` will install the dependency required for uart communication.
+
+In `su` mode: `sudo echo uart2 > /sys/devices/platform/bone_capemgr/slots` will add the uart2 tree overlay
 
 #### External web server
 Install a java 8+ jdk [ like the oracle one ](http://www.oracle.com/technetwork/java/javase/downloads/jdk9-downloads-3848520.html). Another option is [openjdk](http://openjdk.java.net/install/index.html)
