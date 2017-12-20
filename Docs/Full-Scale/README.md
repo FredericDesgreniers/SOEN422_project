@@ -189,7 +189,6 @@ Putty and Ubunutu subsystem for windows were used to shh into the beaglebone.
 TODO: Initialize arudino system
 
 #### Beaglebone
-
 ##### Shell
 `sudo gateway default add 192.168.7.1` and `echo "nameserver 8.8.8.8" > etc/resolv.conf` will enable the beaglebone to use the external computers internet connection. 
 
@@ -198,7 +197,11 @@ TODO: Initialize arudino system
 
 In `su` mode: `sudo echo uart2 > /sys/devices/platform/bone_capemgr/slots` will add the uart2 tree overlay
 
-#### External web server
+#### Windows Computer
+##### Network
+Enable internet sharing on the proper network adapter (the one connected to the internet). 
+
+##### External web server
 Install a java 8+ jdk [ like the oracle one ](http://www.oracle.com/technetwork/java/javase/downloads/jdk9-downloads-3848520.html). Another option is [openjdk](http://openjdk.java.net/install/index.html)
 
 Install [apache maven](https://maven.apache.org/). In the /website source code directory, run `mvnw clean`, `mvnw validate` and `mvnw package`. 
