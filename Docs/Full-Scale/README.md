@@ -314,3 +314,10 @@ We also had a problem with space management on the beaglebone since their wasn't
 ![deformation](https://user-images.githubusercontent.com/16867443/34211718-f7811b1c-e567-11e7-951a-ff1400bf1653.jpg)
 #### Figure 6
 ![image](https://user-images.githubusercontent.com/16867443/34231241-39660268-e5a9-11e7-99c4-119800c57acd.png)
+
+### References
+[PySerial Library](https://github.com/pyserial/pyserial)
+
+[HX711 Library](https://github.com/bogde/HX711)
+
+[Spring Boot Library](https://github.com/spring-projects/spring-boot)
