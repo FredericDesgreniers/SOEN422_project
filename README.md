@@ -4,7 +4,7 @@ Our plan for this project to to build a force test system which is intended to b
 ### Table of Contents
 1. [Contributors](#Contributors)
 
-## Contributors - Team Cerberus
+## Contributors - Team A
 **Name** | **ID**
 :--:|---
 Christopher McArthur | `40004257`
