@@ -1,7 +1,7 @@
 # Force Gauge - Team A
 In this project we aimed to develop a force gauge which was capable of detecting the force applied from a human punch. This document outlines the goals of the project, the design of the system, and the final resulting prototype which was delivered.
 
-> To best view this document, use the [link](https://github.com/FredericDesgreniers/SOEN422_project/blob/master/Docs/Full-Scale/README.md) provided.
+> To best view this document, use this [link](https://github.com/FredericDesgreniers/SOEN422_project/blob/master/Docs/Full-Scale/README.md).
 
 ### Table of Contents
 1. [Contributors](#contributors)
@@ -37,7 +37,7 @@ Frederic Desgreniers | `40016777`
 
 ## Description
 #### Name
-This force gague system, called the **Punch O-Meter**, is designed to be placed into any punching bag and display live results of the forces being applied. 
+This force gague system, called the **Punch O-Meter**, is designed to be placed into any punching bag and display live results of the forces being applied.
 
 #### Functionality
 The system would include a web server and with an internet connection allowing users to view the data from their computer or mobile device. This data is the _force_ currently applied to the bag which is being captured by a microcontroller of the force gauge(s) set up in the bag. 
@@ -50,7 +50,7 @@ The project succeded is producing a functional prototype which was able to captu
 
 ## Hardware Design
 #### System
-The system is comprised of three components; a force gauge, an arduino microcontroller, and a beaglebone black. Together they registered, interpolated and presented the data to provide a smooth user experience. Additionally an external machine was used to run the webserver to allow for better connectivity. An example of the system can seen in [Figure 4](#figure-4).
+The system is comprised of three components; a force gauge, an arduino microcontroller, and a beaglebone black. Together they registered, interpolated and presented the data to provide a smooth user experience. Additionally an external machine was used to run the webserver to allow for better connectivity. An example of the system can seen in [Figure 4](#figure-4) and the diagram in [Figure 6](#figure-6).
 
 #### Subsystems
 ###### Force Gauge
@@ -312,3 +312,5 @@ We also had a problem with space management on the beaglebone since their wasn't
 ![calibration](https://user-images.githubusercontent.com/16867443/34211678-dac03db4-e567-11e7-9c89-6a21962e2ef7.jpg)
 #### Figure 5
 ![deformation](https://user-images.githubusercontent.com/16867443/34211718-f7811b1c-e567-11e7-951a-ff1400bf1653.jpg)
+#### Figure 6
+![image](https://user-images.githubusercontent.com/16867443/34231241-39660268-e5a9-11e7-99c4-119800c57acd.png)
