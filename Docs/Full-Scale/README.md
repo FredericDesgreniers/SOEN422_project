@@ -302,22 +302,22 @@ The library used for websockets is java 8+, however the beaglebone defaults to j
 We also had a problem with space management on the beaglebone since their wasn't enough space for the python libraries, the source code, java and all the java dependencies. This was mostly due to a faillure when selecting the web framework since spring-boot is far from lightweight. Looking back, using a handmade c++ or python webserver would have been a better solution. 
 
 ## Apendix
-#### Figure 1
+
+#### References
+* [PySerial Library](https://github.com/pyserial/pyserial)
+* [HX711 Library](https://github.com/bogde/HX711)
+* [Spring Boot Library](https://github.com/spring-projects/spring-boot)
+
+#### Figures
+###### Figure 1
 ![proto type](https://user-images.githubusercontent.com/16867443/33049867-0507c6fe-ce30-11e7-84e0-2e0c05b6bfcf.jpg)
-#### Figure 2
+###### Figure 2
 ![concept modle](https://user-images.githubusercontent.com/16867443/33038124-a067f7a6-ce01-11e7-8dc8-f3b6b804d6f7.png)
-#### Figure 3
+###### Figure 3
 ![system](https://user-images.githubusercontent.com/16867443/34211655-ca056dfa-e567-11e7-89f4-f3b61ca5a881.jpg)
-#### Figure 4
+###### Figure 4
 ![calibration](https://user-images.githubusercontent.com/16867443/34211678-dac03db4-e567-11e7-9c89-6a21962e2ef7.jpg)
-#### Figure 5
+###### Figure 5
 ![deformation](https://user-images.githubusercontent.com/16867443/34211718-f7811b1c-e567-11e7-951a-ff1400bf1653.jpg)
-#### Figure 6
+###### Figure 6
 ![image](https://user-images.githubusercontent.com/16867443/34231241-39660268-e5a9-11e7-99c4-119800c57acd.png)
-
-### References
-[PySerial Library](https://github.com/pyserial/pyserial)
-
-[HX711 Library](https://github.com/bogde/HX711)
-
-[Spring Boot Library](https://github.com/spring-projects/spring-boot)
